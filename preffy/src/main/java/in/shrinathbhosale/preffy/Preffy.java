@@ -10,6 +10,14 @@ public final class Preffy {
     private static Preffy instance;
     private SharedPreferences sharedPreferences;
 
+    private static final boolean DEFAULT_BOOLEAN_VAL  = false;
+    private static final float DEFAULT_FLOAT_VAL = 0.0F;
+    private static final int DEFAULT_INT_VAL = -1;
+    private static final long DEFAULT_LONG_VAL = -1L;
+    private static final double DEFAULT_DOUBLE_VAL = 0.0;
+    private static final String DEFAULT_STRING_VAL = "";
+    private static final Set<String> DEFAULT_SET_VAL = null;
+
     private Preffy(Context context) {
         sharedPreferences = context.getSharedPreferences(
                 context.getPackageName() + "_preferences",
@@ -25,31 +33,62 @@ public final class Preffy {
         return instance;
     }
 
+    public boolean getBoolean(String key) {
+        return sharedPreferences.getBoolean(key, DEFAULT_BOOLEAN_VAL);
+    }
+
     public boolean getBoolean(String key, boolean defaultValue) {
         return sharedPreferences.getBoolean(key, defaultValue);
+    }
+
+    public float getFloat(String key) {
+        return sharedPreferences.getFloat(key, DEFAULT_FLOAT_VAL);
     }
 
     public float getFloat(String key, float defaultValue) {
         return sharedPreferences.getFloat(key, defaultValue);
     }
 
+    public int getInt(String key) {
+        return sharedPreferences.getInt(key, DEFAULT_INT_VAL);
+    }
+
     public int getInt(String key, int defaultValue) {
         return sharedPreferences.getInt(key, defaultValue);
+    }
+
+    public long getLong(String key) {
+        return sharedPreferences.getLong(key, DEFAULT_LONG_VAL);
     }
 
     public long getLong(String key, long defaultValue) {
         return sharedPreferences.getLong(key, defaultValue);
     }
 
+    public double getDouble(String key) {
+        if(!contains(key))
+            return DEFAULT_DOUBLE_VAL;
+
+        return Double.longBitsToDouble(getLong(key));
+    }
+
     public double getDouble(String key, double defaultValue) {
         if(!contains(key))
             return defaultValue;
 
-        return Double.longBitsToDouble(getLong(key, 0L));
+        return Double.longBitsToDouble(getLong(key, DEFAULT_LONG_VAL));
+    }
+
+    public String getString(String key) {
+        return sharedPreferences.getString(key, DEFAULT_STRING_VAL);
     }
 
     public String getString(String key, String defaultValue) {
         return sharedPreferences.getString(key, defaultValue);
+    }
+
+    public Set<String> getStringSet(String key) {
+        return sharedPreferences.getStringSet(key, DEFAULT_SET_VAL);
     }
 
     public Set<String> getStringSet(String key, Set<String> defaultValue) {
