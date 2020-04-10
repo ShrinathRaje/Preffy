@@ -3,6 +3,11 @@ package in.shrinathbhosale.preffy;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import androidx.security.crypto.EncryptedSharedPreferences;
+import androidx.security.crypto.MasterKeys;
+
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.Map;
 import java.util.Set;
 
@@ -19,10 +24,21 @@ public final class Preffy {
     private static final Set<String> DEFAULT_SET_VAL = null;
 
     private Preffy(Context context) {
-        sharedPreferences = context.getSharedPreferences(
-                context.getPackageName() + "_preferences",
-                Context.MODE_PRIVATE
-        );
+        try {
+            String masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC);
+
+            sharedPreferences = EncryptedSharedPreferences.create(
+                    context.getPackageName() + "_preferences",
+                    masterKeyAlias,
+                    context,
+                    EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                    EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+            );
+        } catch (GeneralSecurityException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static Preffy getInstance(Context context) {

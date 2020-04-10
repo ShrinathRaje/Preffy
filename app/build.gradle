@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "in.shrinathbhosale.sample"
-        minSdkVersion 14
+        minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
