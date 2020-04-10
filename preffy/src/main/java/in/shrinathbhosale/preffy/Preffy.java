@@ -60,75 +60,75 @@ public final class Preffy {
         return sharedPreferences.getAll();
     }
 
-    public void putBooleanAsync(String key, boolean value) {
+    public void putBoolean(String key, boolean value) {
         sharedPreferences.edit().putBoolean(key, value).apply();
     }
 
-    public boolean putBoolean(String key, boolean value) {
+    public boolean putBooleanSync(String key, boolean value) {
         return sharedPreferences.edit().putBoolean(key, value).commit();
     }
 
-    public void putFloatAsync(String key, float value) {
+    public void putFloat(String key, float value) {
         sharedPreferences.edit().putFloat(key, value).apply();
     }
 
-    public boolean putFloat(String key, float value) {
+    public boolean putFloatSync(String key, float value) {
         return sharedPreferences.edit().putFloat(key, value).commit();
     }
 
-    public void putIntAsync(String key, int value) {
+    public void putInt(String key, int value) {
         sharedPreferences.edit().putInt(key, value).apply();
     }
 
-    public boolean putInt(String key, int value) {
+    public boolean putIntSync(String key, int value) {
         return sharedPreferences.edit().putInt(key, value).commit();
     }
 
-    public void putLongAsync(String key, long value) {
+    public void putLong(String key, long value) {
         sharedPreferences.edit().putLong(key, value).apply();
     }
 
-    public boolean putLong(String key, long value) {
+    public boolean putLongSync(String key, long value) {
         return sharedPreferences.edit().putLong(key, value).commit();
     }
 
-    public void putDoubleAsync(String key, double value) {
-        putLongAsync(key, Double.doubleToRawLongBits(value));
+    public void putDouble(String key, double value) {
+        putLong(key, Double.doubleToRawLongBits(value));
     }
 
-    public boolean putDouble(String key, double value) {
-        return putLong(key, Double.doubleToRawLongBits(value));
+    public boolean putDoubleSync(String key, double value) {
+        return putLongSync(key, Double.doubleToRawLongBits(value));
     }
 
-    public void putStringAsync(String key, String value) {
+    public void putString(String key, String value) {
         sharedPreferences.edit().putString(key, value).apply();
     }
 
-    public boolean putString(String key, String value) {
+    public boolean putStringSync(String key, String value) {
         return sharedPreferences.edit().putString(key, value).commit();
     }
 
-    public void putStringSetAsync(String key, Set<String> value) {
+    public void putStringSet(String key, Set<String> value) {
         sharedPreferences.edit().putStringSet(key, value).apply();
     }
 
-    public boolean putStringSet(String key, Set<String> value) {
+    public boolean putStringSetSync(String key, Set<String> value) {
         return sharedPreferences.edit().putStringSet(key, value).commit();
     }
 
-    public void removeAsync(String key) {
+    public void remove(String key) {
         sharedPreferences.edit().remove(key).apply();
     }
 
-    public boolean remove(String key) {
+    public boolean removeSync(String key) {
         return sharedPreferences.edit().remove(key).commit();
     }
 
-    public void removeAllAsync() {
+    public void removeAll() {
         sharedPreferences.edit().clear().apply();
     }
 
-    public boolean removeAll() {
+    public boolean removeAllSync() {
         return sharedPreferences.edit().clear().commit();
     }
 
