@@ -2,7 +2,7 @@
 
 Preffy is a library that wraps over Android's native [EncryptedSharedPreferences](https://developer.android.com/reference/androidx/security/crypto/EncryptedSharedPreferences) class and gives you a clean and simple API to store the key value pairs. Both keys and values are encrypted, thus adding a security layer to protect your data.
 
-[![](https://jitpack.io/v/ShrinathRaje/Preffy.svg)](https://jitpack.io/#ShrinathRaje/Preffy)
+[![](https://jitpack.io/v/ShrinathRaje/Preffy.svg)](https://jitpack.io/#ShrinathRaje/Preffy) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Preffy-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/8101)
 
 # Download
 ## Requirement
