@@ -2,6 +2,10 @@
 
 Preffy is a library that wraps over Android's native [EncryptedSharedPreferences](https://developer.android.com/reference/androidx/security/crypto/EncryptedSharedPreferences) class and gives you a clean and simple API to store the key value pairs. Both keys and values are encrypted, thus adding a security layer to protect your data.
 # Download
+## Requirement
+```
+minSdkVersion 23
+```
 ## Repository
 Add this in your root `build.gradle` file (**not** your module `build.gradle` file):
 ```
