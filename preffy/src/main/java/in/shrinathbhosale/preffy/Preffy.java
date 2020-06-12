@@ -3,16 +3,11 @@ package in.shrinathbhosale.preffy;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import androidx.security.crypto.EncryptedSharedPreferences;
-import androidx.security.crypto.MasterKeys;
-
-import java.io.IOException;
-import java.security.GeneralSecurityException;
 import java.util.Map;
 import java.util.Set;
 
 /**
- * Preffy is the singleton class that wraps over the android's native EncryptedSharedPreferences implementation and gives you a clean API to persist simple key value pairs.
+ * Preffy is a singleton class that wraps over the android's native SharedPreferences implementation and gives you a clean API to persist simple key value pairs.
  * @author Shrinath Bhosale
  */
 public final class Preffy {
@@ -28,28 +23,14 @@ public final class Preffy {
     private static final Set<String> DEFAULT_SET_VAL = null;
 
     private Preffy(Context context) {
-        try {
-            String masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC);
-
-            sharedPreferences = EncryptedSharedPreferences.create(
-                    context.getPackageName() + "_preferences",
-                    masterKeyAlias,
-                    context,
-                    EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-                    EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-            );
-        } catch (GeneralSecurityException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        sharedPreferences = context.getSharedPreferences(context.getPackageName() + "_preferences", Context.MODE_PRIVATE);
     }
 
     /**
      * @param context the application/activity context
      * @return a singleton instance of Preffy
      */
-    public static Preffy getInstance(Context context) {
+    public static synchronized Preffy getInstance(Context context) {
         if (instance == null) {
             instance = new Preffy(context.getApplicationContext()); //getApplicationContext to avoid memory leaks
         }
